@@ -1,5 +1,5 @@
 node_modules
 .env
-pics
 .DS_Store
 .package-lock.json
+db.json

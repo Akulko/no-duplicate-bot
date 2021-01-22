@@ -4,5 +4,4 @@ const getMessageLink = (chatId, messageId) => `https://t.me/c/${chatId}/${messag
 module.exports = {
   getChatId,
   getMessageLink,
-}
-;
+};

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --ignore './pics/' index.js",
+    "dev": "nodemon --ignore './pics/' --ignore './db.json'  index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -13,9 +13,12 @@
     "fs-extra": "^9.1.0",
     "image-size": "^0.9.3",
     "jpeg-js": "^0.4.3",
+    "lowdb": "^1.0.0",
     "node-telegram-bot-api": "^0.40.0",
     "nodemon": "^2.0.7",
-    "resemblejs": "^3.2.5"
+    "resemblejs": "^3.2.5",
+    "sharp": "^0.27.0",
+    "sharp-phash": "^2.0.0"
   },
   "devDependencies": {
     "eslint-config-airbnb-base": "^14.2.1",
