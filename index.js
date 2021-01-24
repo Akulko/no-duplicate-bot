@@ -1,13 +1,4 @@
 require("dotenv").config();
-const TelegramBot = require("node-telegram-bot-api");
-const axios = require("axios");
-const {
-  readdir,
-  readFile,
-  writeFile,
-  existsSync,
-  mkdirSync,
-} = require("fs-extra");
 const path = require("path");
 const photo = require("./photo");
 const chat = require("./chat");
@@ -48,7 +39,8 @@ try {
       const oldPics = [];
 
       for (img of phashHistory) {
-        if (((await dist(img.phash, phash)) <= 5) && img.sender !== msg.from.id) oldPics.push(img.messageLink);
+        console.log(typeof img.sender, msg.from.id)
+        if (((await dist(img.phash, phash)) <= 5) && img.senderId !== msg.from.id) oldPics.push(img.messageLink);
       }
 
       db.get(chatId).push({ messageLink, phash, senderId: msg.from.id, date: Date.now() }).write();
