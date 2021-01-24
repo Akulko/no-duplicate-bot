@@ -23,7 +23,6 @@ bot.launch();
 try {
   bot.on("message", async (ctx) => {
     const { message: msg, telegram } = ctx;
-    console.log(msg);
     if (!msg.photo) return;
     try {
       // Get chat info
@@ -40,7 +39,7 @@ try {
       // Create image history if new chat
 
       if (!db.has(chatId).value()) {
-        db.set(chatId, [{ messageLink, phash, date: Date.now() }]).write();
+        db.set(chatId, [{ messageLink, phash, senderId: msg.from.id, date: Date.now() }]).write();
         return;
       }
 
@@ -49,10 +48,10 @@ try {
       const oldPics = [];
 
       for (img of phashHistory) {
-        if ((await dist(img.phash, phash)) <= 5) oldPics.push(img.messageLink);
+        if (((await dist(img.phash, phash)) <= 5) && img.sender !== msg.from.id) oldPics.push(img.messageLink);
       }
 
-      db.get(chatId).push({ messageLink, phash, date: Date.now() }).write();
+      db.get(chatId).push({ messageLink, phash, senderId: msg.from.id, date: Date.now() }).write();
 
       if (!oldPics.length) return;
 
